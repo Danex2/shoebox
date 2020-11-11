@@ -46,5 +46,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/components/(.*)": "<rootDir>/components/$1"
+    }
   }
 }
