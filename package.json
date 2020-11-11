@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest __tests__ --watch"
+    "test:watch": "jest __tests__ --watch",
+    "test": "jest __tests__",
+    "cm": "cz"
   },
   "dependencies": {
+    "@prisma/client": "^2.11.0",
     "next": "10.0.0",
     "next-auth": "^3.1.0",
     "react": "17.0.1",
@@ -23,6 +26,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
+    "@types/next-auth": "^3.1.14",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "babel-jest": "^26.6.1",

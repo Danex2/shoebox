@@ -1,4 +1,3 @@
-import { idText } from "typescript";
 import Home from "../pages/index";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
