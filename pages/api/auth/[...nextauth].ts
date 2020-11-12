@@ -2,17 +2,9 @@ import NextAuth, { InitOptions } from "next-auth";
 import Providers from "next-auth/providers";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import Adapters from "next-auth/adapters";
 
-let prisma;
-
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
-} else {
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
-}
+const prisma = new PrismaClient();
 
 const options: InitOptions = {
   providers: [
@@ -22,6 +14,7 @@ const options: InitOptions = {
       region: "NA",
     }),
   ],
+  adapter: Adapters.Prisma.Adapter({ prisma }),
 };
 
 export default (request: NextApiRequest, response: NextApiResponse) =>

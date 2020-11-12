@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "migrate": "npx prisma migrate save --experimental",
+    "apply": "npx prisma migrate up --experimental",
+    "generate": "npx prisma generate",
     "start": "next start",
     "test:watch": "jest __tests__ --watch",
     "test": "jest __tests__",
@@ -33,23 +36,19 @@
     "commitizen": "^4.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^4.3.0",
+    "is-ci": "^2.0.0",
     "jest": "^26.6.1",
     "msw": "^0.21.3",
     "typescript": "^4.0.5"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test"
+      "pre-commit": "git add . && yarn test"
     }
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^@/components/(.*)": "<rootDir>/components/$1"
     }
   }
 }
