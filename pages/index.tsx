@@ -1,9 +1,10 @@
-import Layout from "@/components/Layout";
+import Container from "@/components/Layout/Container";
+import { Text } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <Layout title="Home">
-      <div className="text-4xl font-bold">Hello warcraftguilds</div>
-    </Layout>
+    <Container title="Home">
+      <Text fontSize="6xl">Hello warcraftguilds</Text>
+    </Container>
   );
 }

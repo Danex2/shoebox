@@ -14,12 +14,15 @@
     "cm": "cz"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.0.3",
+    "@emotion/react": "^11.1.2",
+    "@emotion/styled": "^11.0.0",
     "@prisma/client": "^2.11.0",
+    "framer-motion": "^2.9.5",
     "next": "10.0.0",
     "next-auth": "^3.1.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "tailwindcss": "^1.9.6"
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.12.1",
@@ -43,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add . && yarn test"
+      "pre-commit": "yarn test"
     }
   },
   "config": {
