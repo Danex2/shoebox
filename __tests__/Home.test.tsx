@@ -5,6 +5,6 @@ import "@testing-library/jest-dom/extend-expect";
 describe("Testing the app", () => {
   it("Should render the home page", () => {
     const { getByText } = render(<Home />);
-    expect(getByText("Hello warcraftguilds")).toBeInTheDocument();
+    expect(getByText("Search")).toBeInTheDocument();
   });
 });
