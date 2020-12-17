@@ -26,11 +26,11 @@ export default function Footer() {
           textTransform="uppercase"
           display="flex"
           flexDirection={{ base: "column", lg: "row" }}
+          alignItems={{ base: "", lg: "baseline" }}
         >
           <Stack
             direction="row"
             spacing={5}
-            textAlign="center"
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}
           >

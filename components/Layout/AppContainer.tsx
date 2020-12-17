@@ -6,6 +6,7 @@ import Head from "next/head";
 type LayoutProps = {
   title: string;
   children: React.ReactNode;
+  props: any;
 };
 
 export default function AppContainer({
@@ -16,9 +17,9 @@ export default function AppContainer({
   return (
     <Box bg="gray.800" textColor="gray.300">
       <Head>
-        <title>{title}</title>
+        <title>{`WarcraftGuilds | ${title}`}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content={`Warcraft Guilds | ${title}`} />
+        <meta property="og:title" content={`WarcraftGuilds | ${title}`} />
         <meta
           property="og:url"
           content="https://www.imdb.com/title/tt0117500/"

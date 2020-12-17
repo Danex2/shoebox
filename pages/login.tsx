@@ -25,7 +25,7 @@ export default function Login() {
         >
           Log in with Battle.net
         </Button>
-        <Text as="p" fontSize={{ base: "sm", lg: "lg" }}>
+        <Text as="p" fontSize={{ base: "sm", lg: "md" }}>
           We use your battle.net account as a way of authenticating you and only
           store your username in our records. We will never send you e-mails or
           ask you for a password. Ever.
