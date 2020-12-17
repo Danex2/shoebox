@@ -6,7 +6,7 @@ import Head from "next/head";
 type LayoutProps = {
   title: string;
   children: React.ReactNode;
-  props: any;
+  [x: string]: any;
 };
 
 export default function AppContainer({
