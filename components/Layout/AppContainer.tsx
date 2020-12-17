@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import Navbar from "@/components/Layout/Navbar";
-import Footer from "@/components/Layout/Footer";
-import { Box } from "@chakra-ui/react";
+import Navbar from "@/components/Layout/Navbar/Navbar";
+import Footer from "@/components/Layout/Footer/Footer";
+import { Box, Container } from "@chakra-ui/react";
 import Head from "next/head";
 
 type LayoutProps = {
@@ -9,7 +8,11 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AppContainer({ title, children }: LayoutProps) {
+export default function AppContainer({
+  title,
+  children,
+  ...props
+}: LayoutProps) {
   return (
     <Box bg="gray.800" textColor="gray.300">
       <Head>
@@ -28,7 +31,9 @@ export default function AppContainer({ title, children }: LayoutProps) {
       </Head>
       <Box minH="100vh" display="flex" flexDirection="column">
         <Navbar />
-        <Box as="main">{children}</Box>
+        <Container as="main" maxW="6xl" flex={1} {...props}>
+          {children}
+        </Container>
         <Footer />
       </Box>
     </Box>

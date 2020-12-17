@@ -4,7 +4,9 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   styles: {
     global: {
-      fontFamily: "Archivo",
+      body: {
+        fontFamily: "Archivo, sans-serif",
+      },
     },
   },
 });
