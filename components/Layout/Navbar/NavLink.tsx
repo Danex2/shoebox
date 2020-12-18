@@ -14,13 +14,13 @@ export default function NavLink({ href, name }: NavLinkProps) {
         fontWeight="semibold"
         fontSize="sm"
         textTransform="uppercase"
-        py={1}
+        py={2}
         px={3}
         borderRadius={3}
         transition="background 0.2s ease-in-out"
         cursor="pointer"
         _hover={{
-          bg: "gray.700",
+          bg: "blue.700",
         }}
       >
         {name}

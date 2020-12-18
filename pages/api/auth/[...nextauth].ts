@@ -8,10 +8,9 @@ const prisma = new PrismaClient();
 
 const options: InitOptions = {
   providers: [
-    Providers.BattleNet({
-      clientId: process.env.BATTLENET_CLIENT_ID!,
-      clientSecret: process.env.BATTLENET_CLIENT_SECRET!,
-      region: "NA",
+    Providers.Discord({
+      clientId: process.env.DISCORD_CLIENT_ID!,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
