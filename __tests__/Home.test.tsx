@@ -7,11 +7,6 @@ jest.mock("next-auth/client");
 
 describe("Testing the app", () => {
   it.skip("Should render the home page", () => {
-    // const mockSession: Session = {
-    //   expires: "1",
-    //   user: { email: "dane@gmail.com", name: "Dane", image: "c" },
-    // };
-    // (client.useSession as jest.Mock).mockReturnValueOnce([mockSession, false]);
     const { getByText } = render(<Home />);
 
     screen.debug();
