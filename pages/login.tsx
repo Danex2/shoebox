@@ -6,6 +6,8 @@ import { signIn, getSession } from "next-auth/client";
 import { GetServerSideProps } from "next";
 
 export default function Login() {
+  const { VERCEL_ENV } = process.env;
+
   return (
     <AppContainer
       title="Login"
@@ -25,7 +27,12 @@ export default function Login() {
           }}
           leftIcon={<FaDiscord style={{ fontSize: 20 }} />}
           onClick={() =>
-            signIn("discord", { callbackUrl: "http://localhost:3000/" })
+            signIn("discord", {
+              callbackUrl:
+                VERCEL_ENV === "preview"
+                  ? "https://staging.warcraftguilds.app/"
+                  : "http://localhost:3000",
+            })
           }
           data-cy="login-button"
         >
