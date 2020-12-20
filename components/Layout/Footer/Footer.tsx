@@ -29,7 +29,7 @@ export default function Footer() {
           alignItems={{ base: "", lg: "baseline" }}
         >
           <Stack
-            direction="row"
+            direction={{ base: "column", lg: "row" }}
             spacing={5}
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}

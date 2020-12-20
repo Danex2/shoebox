@@ -9,5 +9,5 @@ TODO
 ## Stack
 
 Next.js  
-TailwindCSS  
+ChakraUI  
 Vercel

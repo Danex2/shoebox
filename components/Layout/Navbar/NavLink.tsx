@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Text } from "@chakra-ui/react";
 
 type NavLinkProps = {
-  href: string;
-  name: string;
+  href?: string;
+  name?: string;
 };
 
 export default function NavLink({ href, name }: NavLinkProps) {
@@ -14,13 +14,10 @@ export default function NavLink({ href, name }: NavLinkProps) {
         fontWeight="semibold"
         fontSize="sm"
         textTransform="uppercase"
-        py={1}
-        px={3}
-        borderRadius={3}
-        transition="background 0.2s ease-in-out"
         cursor="pointer"
+        transition="color 0.5s ease-in-out"
         _hover={{
-          bg: "gray.700",
+          color: "gray.400",
         }}
       >
         {name}

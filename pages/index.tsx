@@ -1,6 +1,5 @@
 import AppCpntainer from "@/components/Layout/AppContainer";
 import { Grid, Text, Container } from "@chakra-ui/react";
-import AppContent from "@/components/Layout/AppContent";
 import GuildCard from "@/components/GuildCard";
 
 export default function Home() {

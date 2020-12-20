@@ -2,6 +2,7 @@ import { Container } from "@chakra-ui/react";
 
 type AppContentProps = {
   children: React.ReactNode;
+  [x: string]: any;
 };
 
 export default function AppContent({ children, ...props }: AppContentProps) {

@@ -4,14 +4,29 @@ import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import Adapters from "next-auth/adapters";
 
-const prisma = new PrismaClient();
+declare global {
+  namespace NodeJS {
+    interface Global {
+      prisma: any;
+    }
+  }
+}
 
+let prisma;
+
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+}
 const options: InitOptions = {
   providers: [
-    Providers.BattleNet({
-      clientId: process.env.BATTLENET_CLIENT_ID!,
-      clientSecret: process.env.BATTLENET_CLIENT_SECRET!,
-      region: "NA",
+    Providers.Discord({
+      clientId: process.env.DISCORD_CLIENT_ID!,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
