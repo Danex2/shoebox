@@ -8,6 +8,8 @@ import { GetServerSideProps } from "next";
 export default function Login() {
   const { VERCEL_ENV } = process.env;
 
+  console.log(VERCEL_ENV);
+
   return (
     <AppContainer
       title="Login"
