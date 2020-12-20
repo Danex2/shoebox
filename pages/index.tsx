@@ -99,7 +99,7 @@ export default function Home() {
 
   return (
     <AppCpntainer title="Home">
-      <Text fontSize="6xl" fontWeight="bold">
+      <Text fontSize="6xl" fontWeight="bold" data-cy="search-text">
         Search
       </Text>
       <Grid

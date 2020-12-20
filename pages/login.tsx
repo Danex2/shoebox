@@ -27,6 +27,7 @@ export default function Login() {
           onClick={() =>
             signIn("discord", { callbackUrl: "http://localhost:3000/" })
           }
+          data-cy="login-button"
         >
           Log in with Discord
         </Button>
