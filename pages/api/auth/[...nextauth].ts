@@ -30,6 +30,13 @@ const options: InitOptions = {
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
+  callbacks: {
+    redirect: async (url, baseUrl) => {
+      return url.startsWith(baseUrl)
+        ? Promise.resolve(url)
+        : Promise.resolve(baseUrl);
+    },
+  },
 };
 
 export default (request: NextApiRequest, response: NextApiResponse) =>
