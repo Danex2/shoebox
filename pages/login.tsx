@@ -2,12 +2,11 @@ import AppContainer from "@/components/Layout/AppContainer";
 import AppContent from "@/components/Layout/AppContent";
 import { Button, Text } from "@chakra-ui/react";
 import { FaDiscord } from "react-icons/fa";
-import { signIn, getSession } from "next-auth/client";
+import { signIn } from "next-auth/client";
 import { GetServerSideProps } from "next";
+import { getUserAuth } from "@/lib/ssrUtils";
 
 export default function Login() {
-  console.log(process.env.NEXT_PUBLIC_CALLBACK_URL);
-
   return (
     <AppContainer
       title="Login"
@@ -45,17 +44,4 @@ export default function Login() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-  if (session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "http://localhost:3000/",
-      },
-    };
-  }
-  return {
-    props: {},
-  };
-};
+export const getServerSideProps: GetServerSideProps = getUserAuth;

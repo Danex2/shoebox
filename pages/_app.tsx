@@ -10,6 +10,8 @@ const theme = extendTheme({
       },
     },
   },
+  initialColorMode: "dark",
+  useSystemColorMode: true,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
