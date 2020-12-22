@@ -80,15 +80,18 @@ export default function Create() {
               isRequired
               rows={15}
             />
-            <Stack spacing={3} direction={{ base: "column", lg: "row" }}>
-              <Checkbox defaultIsChecked>English</Checkbox>
-              <Checkbox>French</Checkbox>
-              <Checkbox>Italian</Checkbox>
-              <Checkbox>German</Checkbox>
-              <Checkbox>Russian</Checkbox>
-              <Checkbox>Korean</Checkbox>
-              <Checkbox>Chinese</Checkbox>
-            </Stack>
+            <FormControl id="languages">
+              <FormLabel>Languages Spoken</FormLabel>
+              <Stack spacing={3} direction={{ base: "column", lg: "row" }}>
+                <Checkbox defaultIsChecked>English</Checkbox>
+                <Checkbox>French</Checkbox>
+                <Checkbox>Italian</Checkbox>
+                <Checkbox>German</Checkbox>
+                <Checkbox>Russian</Checkbox>
+                <Checkbox>Korean</Checkbox>
+                <Checkbox>Chinese</Checkbox>
+              </Stack>
+            </FormControl>
             <FormControl as="fieldset" isRequired>
               <FormLabel as="legend">Faction</FormLabel>
               <RadioGroup defaultValue="Horde">
