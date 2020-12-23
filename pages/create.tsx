@@ -1,13 +1,10 @@
 import AppContainer from "@/components/Layout/AppContainer";
 import AppContent from "@/components/Layout/AppContent";
-import { getUserAuth } from "@/lib/ssrUtils";
 import { GetServerSideProps } from "next";
 import { useForm } from "react-hook-form";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Select,
   Textarea,

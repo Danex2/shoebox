@@ -34,7 +34,7 @@ export default function Footer() {
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}
           >
-            <Text>About</Text>
+            <Link href="/about">About</Link>
             <Text>Privacy Policy</Text>
             <Text>Terms of Service</Text>
           </Stack>
