@@ -11,12 +11,16 @@ import { FaTwitter, FaGithub } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Option from "@/components/Option";
 import { useLanguage } from "../../../context/LanguageContext";
+import en from "../../../translations/en";
+import fr from "../../../translations/fr";
 
 export default function Footer() {
   const router = useRouter();
   const { language, setLanguage } = useLanguage();
 
   const { locale, pathname } = router;
+
+  const t = locale === "en" ? en : fr;
 
   const changeLanguage = (e) => {
     const locale = e.target.value;
@@ -51,10 +55,10 @@ export default function Footer() {
             mb={{ base: 3, lg: 0 }}
           >
             <Link href={locale === "en" ? "/about" : `${locale}/about`}>
-              About
+              {t.footer.links[0]}
             </Link>
-            <Text>Privacy Policy</Text>
-            <Text>Terms of Service</Text>
+            <Text>{t.footer.links[1]}</Text>
+            <Text>{t.footer.links[2]}</Text>
           </Stack>
           <Text ml={{ base: "", lg: "auto" }} mr={3} mb={{ base: 3, lg: 0 }}>
             Warcraftguilds &copy; {new Date().getFullYear()}

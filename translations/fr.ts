@@ -16,4 +16,11 @@ Autre que l'utilisation de votre compte Discord pour vous connecter (les seules 
           enregistrés sont votre nom d'utilisateur Discord, l'e-mail que vous avez utilisé pour vous inscrire
           discord et votre image d'avatar discord) nous ne stockons rien d'autre
           lié à votre compte discord et ne vous enverra jamais d'e-mails.`,
+  footer: {
+    links: [
+      "À propos",
+      "Politique de confidentialité",
+      `conditions d'utilisation`,
+    ],
+  },
 };

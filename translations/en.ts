@@ -8,4 +8,7 @@ export default {
           saved are your discord username, the email you used to sign up to
           discord and your discord avatar image) we do not store anything else
           related to your discord account and will never send you emails.`,
+  footer: {
+    links: ["About", "Privacy policy", "terms of service"],
+  },
 };
