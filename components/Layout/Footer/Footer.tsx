@@ -9,18 +9,20 @@ import {
 } from "@chakra-ui/react";
 import { FaTwitter, FaGithub } from "react-icons/fa";
 import { useRouter } from "next/router";
-import en from "../../../translations/en";
-import fr from "../../../translations/fr";
+import Option from "@/components/Option";
+import { useLanguage } from "../../../context/LanguageContext";
 
 export default function Footer() {
   const router = useRouter();
-  const { locale } = router;
+  const { language, setLanguage } = useLanguage();
 
-  const t = locale === "en" ? en : fr;
+  const { locale, pathname } = router;
 
   const changeLanguage = (e) => {
     const locale = e.target.value;
-    router.push("/about", "/about", { locale });
+    router.push(pathname, pathname, { locale });
+
+    // setLanguage(locale);
   };
 
   return (
@@ -48,20 +50,23 @@ export default function Footer() {
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}
           >
-            <Link href="/about">About</Link>
+            <Link href={locale === "en" ? "/about" : `${locale}/about`}>
+              About
+            </Link>
             <Text>Privacy Policy</Text>
             <Text>Terms of Service</Text>
           </Stack>
           <Text ml={{ base: "", lg: "auto" }} mr={3} mb={{ base: 3, lg: 0 }}>
             Warcraftguilds &copy; {new Date().getFullYear()}
           </Text>
-          <Select w="80px" borderColor="gray.700" onChange={changeLanguage}>
-            <option value="en" style={{ background: "#2D3748" }}>
-              EN
-            </option>
-            <option value="fr" style={{ background: "#2D3748" }}>
-              FR
-            </option>
+          <Select
+            w="80px"
+            borderColor="gray.700"
+            onChange={changeLanguage}
+            defaultValue={language}
+          >
+            <Option value="en" name="EN" />
+            <Option value="fr" name="FR" />
           </Select>
         </Box>
       </Container>

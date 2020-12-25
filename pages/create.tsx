@@ -17,6 +17,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { getSession } from "next-auth/client";
+import Option from "@/components/Option";
 
 export default function Create() {
   const { register, handleSubmit, errors } = useForm();
@@ -44,29 +45,24 @@ export default function Create() {
               <FormControl id="region" isRequired>
                 <FormLabel>Region</FormLabel>
                 <Select borderColor="gray.700" bg="gray.700">
-                  <option style={{ background: "#2D3748" }}>NA</option>
-                  <option style={{ background: "#2D3748" }}>KR</option>
-                  <option style={{ background: "#2D3748" }}>CN</option>
-                  <option style={{ background: "#2D3748" }}>EU</option>
+                  <Option value="na" name="NA" />
+                  <Option value="kr" name="KR" />
+                  <Option value="eu" name="EU" />
+                  <Option value="cn" name="CN" />
                 </Select>
               </FormControl>
               <FormControl id="server" isRequired>
                 <FormLabel>Server</FormLabel>
                 <Select borderColor="gray.700" bg="gray.700">
-                  <option style={{ background: "#2D3748" }}>Illidan</option>
-                  <option style={{ background: "#2D3748" }}>Area-52</option>
-                  <option style={{ background: "#2D3748" }}>Sargeras</option>
-                  <option style={{ background: "#2D3748" }}>Stormscale</option>
+                  <Option value="illidan" name="Illidan" />
                 </Select>
               </FormControl>
               <FormControl id="discipline" isRequired>
                 <FormLabel>Discipline</FormLabel>
                 <Select borderColor="gray.700" bg="gray.700">
-                  <option style={{ background: "#2D3748" }}>Hardcore</option>
-                  <option style={{ background: "#2D3748" }}>
-                    Semi-hardcore
-                  </option>
-                  <option style={{ background: "#2D3748" }}>Casual</option>
+                  <Option value="casual" name="Casual" />
+                  <Option value="hardcore" name="Hardcore" />\
+                  <Option value="semi-hardcore" name="Semi-hardcore" />
                 </Select>
               </FormControl>
             </Stack>
