@@ -1,7 +1,6 @@
 import AppContainer from "@/components/Layout/AppContainer";
 import AppContent from "@/components/Layout/AppContent";
-import en from "../translations/en";
-import fr from "../translations/fr";
+import { getLocale } from "@/lib/getLocale";
 import { Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
@@ -10,7 +9,7 @@ export default function About() {
 
   const { locale } = router;
 
-  const t = locale === "en" ? en : fr;
+  const t = getLocale(locale);
 
   return (
     <AppContainer title="About" mt={20}>

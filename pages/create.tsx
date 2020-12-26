@@ -18,9 +18,28 @@ import {
 } from "@chakra-ui/react";
 import { getSession } from "next-auth/client";
 import Option from "@/components/Option";
+import { ReactText, useState } from "react";
+import { useRouter } from "next/router";
+import { getLocale } from "@/lib/getLocale";
 
 export default function Create() {
   const { register, handleSubmit, errors } = useForm();
+
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = getLocale(locale);
+
+  const [clickInputs, setClickInputs] = useState<{
+    languages: ReactText[];
+    faction: ReactText;
+    interests: ReactText[];
+  }>({ languages: [], faction: "", interests: [] });
+
+  const onSubmit = (data) => {
+    console.log({ ...data, ...clickInputs });
+  };
 
   return (
     <AppContainer
@@ -29,22 +48,29 @@ export default function Create() {
       flexDirection="column"
       justifyContent="center"
     >
-      <AppContent py={{ base: 10, lg: 0 }}>
-        <form>
+      <AppContent py={10}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={10}>
             <FormControl id="title" isRequired>
-              <FormLabel>Guild Name</FormLabel>
+              <FormLabel>{t.create.guildName}</FormLabel>
               <Input
                 type="text"
                 maxLength={24}
                 autoComplete="off"
                 borderColor="gray.700"
+                ref={register}
+                name="title"
               />
             </FormControl>
             <Stack direction={{ base: "column", lg: "row" }}>
               <FormControl id="region" isRequired>
-                <FormLabel>Region</FormLabel>
-                <Select borderColor="gray.700" bg="gray.700">
+                <FormLabel>{t.create.region}</FormLabel>
+                <Select
+                  borderColor="gray.700"
+                  bg="gray.700"
+                  ref={register}
+                  name="region"
+                >
                   <Option value="na" name="NA" />
                   <Option value="kr" name="KR" />
                   <Option value="eu" name="EU" />
@@ -52,14 +78,24 @@ export default function Create() {
                 </Select>
               </FormControl>
               <FormControl id="server" isRequired>
-                <FormLabel>Server</FormLabel>
-                <Select borderColor="gray.700" bg="gray.700">
+                <FormLabel>{t.create.server}</FormLabel>
+                <Select
+                  borderColor="gray.700"
+                  bg="gray.700"
+                  ref={register}
+                  name="server"
+                >
                   <Option value="illidan" name="Illidan" />
                 </Select>
               </FormControl>
               <FormControl id="discipline" isRequired>
-                <FormLabel>Discipline</FormLabel>
-                <Select borderColor="gray.700" bg="gray.700">
+                <FormLabel>{t.create.discipline}</FormLabel>
+                <Select
+                  borderColor="gray.700"
+                  bg="gray.700"
+                  ref={register}
+                  name="discipline"
+                >
                   <Option value="casual" name="Casual" />
                   <Option value="hardcore" name="Hardcore" />\
                   <Option value="semi-hardcore" name="Semi-hardcore" />
@@ -67,27 +103,50 @@ export default function Create() {
               </FormControl>
             </Stack>
             <Textarea
-              placeholder="Tell us a little bit about your guild!"
+              placeholder={t.create.placeholderText}
               borderColor="gray.700"
               size="sm"
               isRequired
               rows={15}
+              ref={register}
+              name="description"
             />
             <FormControl id="languages">
-              <FormLabel>Languages Spoken</FormLabel>
-              <Stack spacing={3} direction={{ base: "column", lg: "row" }}>
-                <Checkbox defaultIsChecked>English</Checkbox>
-                <Checkbox>French</Checkbox>
-                <Checkbox>Italian</Checkbox>
-                <Checkbox>German</Checkbox>
-                <Checkbox>Russian</Checkbox>
-                <Checkbox>Korean</Checkbox>
-                <Checkbox>Chinese</Checkbox>
-              </Stack>
+              <FormLabel>{t.create.languages}</FormLabel>
+              <CheckboxGroup
+                colorScheme="blue"
+                defaultValue={["english"]}
+                onChange={(e) =>
+                  setClickInputs({
+                    ...clickInputs,
+                    languages: e,
+                  })
+                }
+              >
+                <Stack spacing={3} direction={{ base: "column", lg: "row" }}>
+                  <Checkbox value="english">English</Checkbox>
+                  <Checkbox value="french">French</Checkbox>
+                  <Checkbox value="italian">Italian</Checkbox>
+                  <Checkbox value="german">German</Checkbox>
+                  <Checkbox value="russian">Russian</Checkbox>
+                  <Checkbox value="korean">Korean</Checkbox>
+                  <Checkbox value="chinese">Chinese</Checkbox>
+                </Stack>
+              </CheckboxGroup>
             </FormControl>
-            <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend">Faction</FormLabel>
-              <RadioGroup defaultValue="Horde">
+            <FormControl as="fieldset" isRequired id="faction">
+              <FormLabel as="legend">{t.create.faction}</FormLabel>
+              <RadioGroup
+                defaultValue="Horde"
+                ref={register}
+                name="faction"
+                onChange={(e) =>
+                  setClickInputs({
+                    ...clickInputs,
+                    faction: e,
+                  })
+                }
+              >
                 <HStack spacing={4}>
                   <Radio value="Horde">Horde</Radio>
                   <Radio value="Alliance">Alliance</Radio>
@@ -95,8 +154,17 @@ export default function Create() {
               </RadioGroup>
             </FormControl>
             <FormControl id="interests">
-              <FormLabel>Interests</FormLabel>
-              <CheckboxGroup colorScheme="blue" defaultValue={["pve"]}>
+              <FormLabel>{t.create.interests}</FormLabel>
+              <CheckboxGroup
+                colorScheme="blue"
+                defaultValue={["pve"]}
+                onChange={(e) =>
+                  setClickInputs({
+                    ...clickInputs,
+                    interests: e,
+                  })
+                }
+              >
                 <HStack>
                   <Checkbox value="pve">PvE</Checkbox>
                   <Checkbox value="pvp">PvP</Checkbox>
@@ -109,6 +177,7 @@ export default function Create() {
               size="2xl"
               w={{ base: "full", lg: 1 / 5 }}
               py={3}
+              type="submit"
             >
               Create
             </Button>

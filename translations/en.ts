@@ -11,4 +11,17 @@ export default {
   footer: {
     links: ["About", "Privacy policy", "terms of service"],
   },
+  login: {
+    description: `We use your discord account as a way of authenticating you and only store your username in our records. We will never send you e-mails or ask you for a password. Ever.`,
+  },
+  create: {
+    guildName: "Guild Name",
+    region: "Region",
+    server: "Server",
+    discipline: "Discipline",
+    languages: "Languages Spoken",
+    faction: "Faction",
+    interests: "Interests",
+    placeholderText: "Tell us a little bit about your guild!",
+  },
 };

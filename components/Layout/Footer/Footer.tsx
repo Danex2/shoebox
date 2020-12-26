@@ -2,7 +2,7 @@ import {
   Box,
   Container,
   Stack,
-  Link,
+  Link as ChakraLink,
   Text,
   StackDivider,
   Select,
@@ -11,8 +11,8 @@ import { FaTwitter, FaGithub } from "react-icons/fa";
 import { useRouter } from "next/router";
 import Option from "@/components/Option";
 import { useLanguage } from "../../../context/LanguageContext";
-import en from "../../../translations/en";
-import fr from "../../../translations/fr";
+import { getLocale } from "../../../lib/getLocale";
+import Link from "next/link";
 
 export default function Footer() {
   const router = useRouter();
@@ -20,25 +20,25 @@ export default function Footer() {
 
   const { locale, pathname } = router;
 
-  const t = locale === "en" ? en : fr;
+  const t = getLocale(locale);
 
   const changeLanguage = (e) => {
     const locale = e.target.value;
     router.push(pathname, pathname, { locale });
 
-    // setLanguage(locale);
+    setLanguage(locale);
   };
 
   return (
     <Box mt="auto" as="footer" bg="gray.900" py={10}>
       <Container maxW="6xl" px={10}>
         <Stack fontSize="2xl" direction="row" mb={10}>
-          <Link href="https://twitter.com" isExternal>
+          <ChakraLink href="https://twitter.com" isExternal>
             <FaTwitter />
-          </Link>
-          <Link href="https://github.com" isExternal>
+          </ChakraLink>
+          <ChakraLink href="https://github.com" isExternal>
             <FaGithub />
-          </Link>
+          </ChakraLink>
         </Stack>
         <Box
           fontWeight="bold"
@@ -54,7 +54,7 @@ export default function Footer() {
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}
           >
-            <Link href={locale === "en" ? "/about" : `${locale}/about`}>
+            <Link href={`${locale}/about`} locale={false}>
               {t.footer.links[0]}
             </Link>
             <Text>{t.footer.links[1]}</Text>
@@ -71,6 +71,7 @@ export default function Footer() {
           >
             <Option value="en" name="EN" />
             <Option value="fr" name="FR" />
+            <Option value="ko" name="KO" />
           </Select>
         </Box>
       </Container>

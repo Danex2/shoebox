@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 interface LanguageContextOptions {
   language?: string;
-  setLanguage: (lang: "en" | "fr" | "de" | "cn" | "sp" | "kr") => void;
+  setLanguage: (lang: "en" | "fr" | "de" | "cn" | "sp" | "ko") => void;
 }
 
 const LanguageContext = createContext<LanguageContextOptions | undefined>(

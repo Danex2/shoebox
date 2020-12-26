@@ -5,8 +5,16 @@ import { FaDiscord } from "react-icons/fa";
 import { signIn } from "next-auth/client";
 import { GetServerSideProps } from "next";
 import { getUserAuth } from "@/lib/ssrUtils";
+import { useRouter } from "next/router";
+import { getLocale } from "@/lib/getLocale";
 
 export default function Login() {
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = getLocale(locale);
+
   return (
     <AppContainer
       title="Login"
@@ -20,7 +28,7 @@ export default function Login() {
           bg="blue.700"
           px={10}
           py={6}
-          mb={3}
+          mb={20}
           _hover={{
             bg: "blue.600",
           }}
@@ -35,9 +43,7 @@ export default function Login() {
           Log in with Discord
         </Button>
         <Text as="p" fontSize={{ base: "sm", lg: "md" }}>
-          We use your discord account as a way of authenticating you and only
-          store your username in our records. We will never send you e-mails or
-          ask you for a password. Ever.
+          {t.login.description}
         </Text>
       </AppContent>
     </AppContainer>

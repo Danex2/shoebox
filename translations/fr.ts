@@ -23,4 +23,17 @@ Autre que l'utilisation de votre compte Discord pour vous connecter (les seules 
       `conditions d'utilisation`,
     ],
   },
+  login: {
+    description: `Nous utilisons votre compte Discord comme moyen de vous authentifier et ne stockons que votre nom d'utilisateur dans nos archives. Nous ne vous enverrons jamais d'e-mails ni ne vous demanderons un mot de passe. Déjà.`,
+  },
+  create: {
+    guildName: "Nom de guilde",
+    region: "Région",
+    server: "Serveur",
+    discipline: "La discipline",
+    languages: "Langues parlées",
+    faction: "Faction",
+    interests: "Intérêts",
+    placeholderText: "Parlez-nous un peu de votre guilde!",
+  },
 };
