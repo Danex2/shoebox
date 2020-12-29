@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { getSession } from "next-auth/client";
 import Option from "@/components/Option";
-import { ReactText, useState } from "react";
+import { ReactText, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getLocale } from "@/lib/getLocale";
 
@@ -27,9 +27,34 @@ export default function Create() {
 
   const router = useRouter();
 
+  const [serverList, setServerList] = useState(null);
+
   const { locale } = router;
 
   const t = getLocale(locale);
+
+  useEffect(() => {
+    fetch("https://us.battle.net/oauth/token", {
+      method: "POST",
+      body: `grant_type=client_credentials&client_id=${process.env.NEXT_PUBLIC_BATTLENET_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_BATTLENET_CLIENT_SECRET}`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        fetch(
+          `https://us.api.blizzard.com/data/wow/realm/index?namespace=dynamic-us&locale=en_US`,
+          {
+            headers: {
+              Authorization: `Bearer ${data.access_token}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => setServerList(data.realms))
+      );
+  }, []);
 
   const [clickInputs, setClickInputs] = useState<{
     languages: ReactText[];
@@ -85,7 +110,9 @@ export default function Create() {
                   ref={register}
                   name="server"
                 >
-                  <Option value="illidan" name="Illidan" />
+                  {serverList?.map(({ id, slug, name }) => (
+                    <Option key={id} value={slug} name={name} />
+                  ))}
                 </Select>
               </FormControl>
               <FormControl id="discipline" isRequired>
@@ -111,7 +138,7 @@ export default function Create() {
               ref={register}
               name="description"
             />
-            <FormControl id="languages">
+            <FormControl id="languages" isRequired>
               <FormLabel>{t.create.languages}</FormLabel>
               <CheckboxGroup
                 colorScheme="blue"
@@ -153,7 +180,7 @@ export default function Create() {
                 </HStack>
               </RadioGroup>
             </FormControl>
-            <FormControl id="interests">
+            <FormControl id="interests" isRequired>
               <FormLabel>{t.create.interests}</FormLabel>
               <CheckboxGroup
                 colorScheme="blue"
@@ -179,7 +206,7 @@ export default function Create() {
               py={3}
               type="submit"
             >
-              Create
+              {t.create.submitButton}
             </Button>
           </Stack>
         </form>

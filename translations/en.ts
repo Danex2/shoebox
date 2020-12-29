@@ -23,5 +23,6 @@ export default {
     faction: "Faction",
     interests: "Interests",
     placeholderText: "Tell us a little bit about your guild!",
+    submitButton: "Create",
   },
 };

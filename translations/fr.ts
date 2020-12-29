@@ -35,5 +35,6 @@ Autre que l'utilisation de votre compte Discord pour vous connecter (les seules 
     faction: "Faction",
     interests: "Intérêts",
     placeholderText: "Parlez-nous un peu de votre guilde!",
+    submitButton: "Créer",
   },
 };

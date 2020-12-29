@@ -20,5 +20,6 @@ export default {
     faction: "파벌",
     interests: "이해",
     placeholderText: "길드에 대해 조금 알려주세요!",
+    submitButton: "창조하다",
   },
 };

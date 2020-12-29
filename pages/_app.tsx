@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Provider } from "next-auth/client";
 import { LanguageProvider } from "../context/LanguageContext";
+import { SWRConfig } from "swr";
 
 const theme = extendTheme({
   styles: {
@@ -18,11 +19,18 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider session={pageProps.session}>
-      <ChakraProvider theme={theme}>
-        <LanguageProvider>
-          <Component {...pageProps} />
-        </LanguageProvider>
-      </ChakraProvider>
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (...args) => fetch(args).then((res) => res.json()),
+        }}
+      >
+        <ChakraProvider theme={theme}>
+          <LanguageProvider>
+            <Component {...pageProps} />
+          </LanguageProvider>
+        </ChakraProvider>
+      </SWRConfig>
     </Provider>
   );
 }
