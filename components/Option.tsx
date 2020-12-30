@@ -1,6 +1,6 @@
 type OptionProps = {
   value: string;
-  name: string;
+  name?: string;
 };
 
 export default function Option({ value, name }: OptionProps) {

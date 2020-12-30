@@ -28,6 +28,7 @@ export default function Create() {
   const router = useRouter();
 
   const [serverList, setServerList] = useState(null);
+  const [region, setRegion] = useState("US");
 
   const { locale } = router;
 
@@ -44,7 +45,7 @@ export default function Create() {
       .then((res) => res.json())
       .then((data) =>
         fetch(
-          `https://us.api.blizzard.com/data/wow/realm/index?namespace=dynamic-us&locale=en_US`,
+          `https://${region}.api.blizzard.com/data/wow/realm/index?namespace=dynamic-${region}&locale=en_US`,
           {
             headers: {
               Authorization: `Bearer ${data.access_token}`,
@@ -52,18 +53,22 @@ export default function Create() {
           }
         )
           .then((res) => res.json())
-          .then((data) => setServerList(data.realms))
+          .then((data) => {
+            setServerList(
+              data.realms.sort((a, b) => (a.name < b.name ? -1 : 1))
+            );
+          })
       );
-  }, []);
+  }, [region]);
 
   const [clickInputs, setClickInputs] = useState<{
     languages: ReactText[];
     faction: ReactText;
     interests: ReactText[];
-  }>({ languages: [], faction: "", interests: [] });
+  }>({ languages: ["english"], faction: "Horde", interests: ["pve"] });
 
   const onSubmit = (data) => {
-    console.log({ ...data, ...clickInputs });
+    console.log({ ...data, ...clickInputs, region });
   };
 
   return (
@@ -93,13 +98,13 @@ export default function Create() {
                 <Select
                   borderColor="gray.700"
                   bg="gray.700"
-                  ref={register}
+                  onChange={(e) => setRegion(e.target.value)}
                   name="region"
                 >
-                  <Option value="na" name="NA" />
+                  <Option value="us" name="US" />
                   <Option value="kr" name="KR" />
                   <Option value="eu" name="EU" />
-                  <Option value="cn" name="CN" />
+                  <Option value="tw" name="TW" />
                 </Select>
               </FormControl>
               <FormControl id="server" isRequired>
@@ -127,6 +132,15 @@ export default function Create() {
                   <Option value="hardcore" name="Hardcore" />\
                   <Option value="semi-hardcore" name="Semi-hardcore" />
                 </Select>
+              </FormControl>
+              <FormControl id="time" isRequired>
+                <FormLabel>Raid time</FormLabel>
+                <Input
+                  type="time"
+                  borderColor="gray.700"
+                  ref={register}
+                  name="time"
+                />
               </FormControl>
             </Stack>
             <Textarea
@@ -157,7 +171,6 @@ export default function Create() {
                   <Checkbox value="german">German</Checkbox>
                   <Checkbox value="russian">Russian</Checkbox>
                   <Checkbox value="korean">Korean</Checkbox>
-                  <Checkbox value="chinese">Chinese</Checkbox>
                 </Stack>
               </CheckboxGroup>
             </FormControl>
