@@ -24,5 +24,8 @@ export default {
     interests: "Interests",
     placeholderText: "Tell us a little bit about your guild!",
     submitButton: "Create",
+    days: "Raid days",
+    time: "Raid time",
+    duration: "Duration",
   },
 };

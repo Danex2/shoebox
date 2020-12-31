@@ -21,5 +21,8 @@ export default {
     interests: "이해",
     placeholderText: "길드에 대해 조금 알려주세요!",
     submitButton: "창조하다",
+    days: "레이드 데이",
+    time: "레이드 시간",
+    duration: "지속",
   },
 };

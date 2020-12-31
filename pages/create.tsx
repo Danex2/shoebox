@@ -16,6 +16,7 @@ import {
   CheckboxGroup,
   Button,
 } from "@chakra-ui/react";
+import MultiSelect from "react-multi-select-component";
 import { getSession } from "next-auth/client";
 import Option from "@/components/Option";
 import { ReactText, useEffect, useState } from "react";
@@ -29,6 +30,7 @@ export default function Create() {
 
   const [serverList, setServerList] = useState(null);
   const [region, setRegion] = useState("US");
+  const [selected, setSelected] = useState([]);
 
   const { locale } = router;
 
@@ -68,7 +70,7 @@ export default function Create() {
   }>({ languages: ["english"], faction: "Horde", interests: ["pve"] });
 
   const onSubmit = (data) => {
-    console.log({ ...data, ...clickInputs, region });
+    console.log({ ...data, ...clickInputs, region, selected });
   };
 
   return (
@@ -133,14 +135,46 @@ export default function Create() {
                   <Option value="semi-hardcore" name="Semi-hardcore" />
                 </Select>
               </FormControl>
+            </Stack>
+            <Stack direction={{ base: "column", lg: "row" }}>
+              <FormControl id="days" isRequired>
+                <FormLabel>{t.create.days}</FormLabel>
+                <MultiSelect
+                  options={[
+                    { label: "Monday", value: "monday" },
+                    { label: "Tuesday", value: "tuesday" },
+                    { label: "Wednesday", value: "wednesday" },
+                    { label: "Thursday", value: "thursday" },
+                    { label: "Friday", value: "friday" },
+                    { label: "Saturday", value: "saturday" },
+                    { label: "Sunday", value: "sunday" },
+                  ]}
+                  value={selected}
+                  onChange={setSelected}
+                  labelledBy={"Select"}
+                />
+              </FormControl>
               <FormControl id="time" isRequired>
-                <FormLabel>Raid time</FormLabel>
+                <FormLabel>{t.create.time}</FormLabel>
                 <Input
                   type="time"
                   borderColor="gray.700"
                   ref={register}
                   name="time"
                 />
+              </FormControl>
+              <FormControl id="duration" isRequired>
+                <FormLabel>{t.create.duration}</FormLabel>
+                <Select
+                  borderColor="gray.700"
+                  bg="gray.700"
+                  ref={register}
+                  name="duration"
+                >
+                  {Array.from({ length: 15 }, (_, i) => (
+                    <Option value={`${i + 1}`} name={`${i + 1} hour (s)`} />
+                  ))}
+                </Select>
               </FormControl>
             </Stack>
             <Textarea
