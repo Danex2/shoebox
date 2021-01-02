@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Provider } from "next-auth/client";
 import { LanguageProvider } from "../context/LanguageContext";
 import { SWRConfig } from "swr";
+import "../css/index.css";
 
 const theme = extendTheme({
   styles: {

@@ -25,10 +25,10 @@ export default function Login() {
       <AppContent textAlign="center">
         <Button
           color="gray.100"
-          bg="blue.700"
+          colorScheme="blue"
           px={10}
           py={6}
-          mb={20}
+          mb={5}
           _hover={{
             bg: "blue.600",
           }}

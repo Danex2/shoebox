@@ -7,11 +7,12 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["uncheckedScalarInputs"]
 }
 
 model Account {
-  id                 Int       @default(autoincrement()) @id
+  id                 Int       @id @default(autoincrement())
   compoundId         String    @unique @map(name: "compound_id")
   userId             Int       @map(name: "user_id")
   providerType       String    @map(name: "provider_type")
@@ -23,15 +24,32 @@ model Account {
   createdAt          DateTime  @default(now()) @map(name: "created_at")
   updatedAt          DateTime  @default(now()) @map(name: "updated_at")
 
+
   @@index([providerAccountId], name: "providerAccountId")
   @@index([providerId], name: "providerId")
   @@index([userId], name: "userId")
-
   @@map(name: "accounts")
 }
 
+model Post {
+  id          String   @id @default(uuid())
+  title       String
+  region      String
+  server      String
+  discipline  String
+  days        String[]
+  time        String
+  duration    String
+  description String
+  languages   String[]
+  faction     String
+  interests   String[]
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
+}
+
 model Session {
-  id           Int      @default(autoincrement()) @id
+  id           Int      @id @default(autoincrement())
   userId       Int      @map(name: "user_id")
   expires      DateTime
   sessionToken String   @unique @map(name: "session_token")
@@ -43,24 +61,25 @@ model Session {
 }
 
 model User {
-  id            Int       @default(autoincrement()) @id
+  id            Int       @id @default(autoincrement())
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map(name: "email_verified")
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  post          Post?
 
   @@map(name: "users")
 }
 
 model VerificationRequest {
-  id         Int      @default(autoincrement()) @id
+  id         Int      @id @default(autoincrement())
   identifier String
   token      String   @unique
   expires    DateTime
-  createdAt  DateTime  @default(now()) @map(name: "created_at")
-  updatedAt  DateTime  @default(now()) @map(name: "updated_at")
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @default(now()) @map(name: "updated_at")
 
   @@map(name: "verification_requests")
 }

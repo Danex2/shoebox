@@ -13,7 +13,6 @@ export default function NavLink({ href, name }: NavLinkProps) {
         as="a"
         fontWeight="semibold"
         fontSize="sm"
-        textTransform="uppercase"
         cursor="pointer"
         transition="color 0.5s ease-in-out"
         _hover={{

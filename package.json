@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "migrate": "npx prisma migrate save --experimental",
-    "apply": "npx prisma migrate up --experimental",
+    "migrate": "npx prisma migrate dev --preview-feature",
+    "apply": "npx prisma migrate deploy --preview-feature",
     "generate": "npx prisma generate",
     "start": "next start",
     "cypress": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --quiet --reporter min",
     "cm": "cz"
   },
   "dependencies": {
@@ -18,7 +18,7 @@
     "@chakra-ui/react": "^1.0.3",
     "@emotion/react": "^11.1.2",
     "@emotion/styled": "^11.0.0",
-    "@prisma/client": "^2.11.0",
+    "@prisma/client": "^2.13.1",
     "framer-motion": "^2.9.5",
     "next": "10.0.0",
     "next-auth": "^3.1.0",
@@ -30,7 +30,7 @@
     "swr": "^0.3.11"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.10.1",
+    "@prisma/cli": "^2.13.1",
     "@types/next-auth": "^3.1.14",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",

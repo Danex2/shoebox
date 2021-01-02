@@ -15,6 +15,7 @@ import {
   Radio,
   CheckboxGroup,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import MultiSelect from "react-multi-select-component";
 import { getSession } from "next-auth/client";
@@ -24,13 +25,15 @@ import { useRouter } from "next/router";
 import { getLocale } from "@/lib/getLocale";
 
 export default function Create() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const router = useRouter();
 
   const [serverList, setServerList] = useState(null);
   const [region, setRegion] = useState("US");
   const [selected, setSelected] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const toast = useToast();
 
   const { locale } = router;
 
@@ -70,7 +73,35 @@ export default function Create() {
   }>({ languages: ["english"], faction: "Horde", interests: ["pve"] });
 
   const onSubmit = (data) => {
-    console.log({ ...data, ...clickInputs, region, selected });
+    fetch("/api/post", {
+      method: "POST",
+      body: JSON.stringify({
+        ...data,
+        languages: clickInputs.languages,
+        faction: clickInputs.faction,
+        interests: clickInputs.interests,
+        region,
+        days: selected.map((d) => d.value),
+      }),
+    }).then((response) => {
+      if (!response.ok) {
+        toast({
+          title: "Oh no!",
+          description:
+            "There was an error creating the post, make sure you do not already have an active post and try again.",
+          duration: 4000,
+          status: "error",
+          isClosable: true,
+        });
+
+        setSubmitting(true);
+        setTimeout(() => {
+          setSubmitting(false);
+        }, 4000);
+      } else {
+        router.push("/");
+      }
+    });
   };
 
   return (
@@ -161,6 +192,7 @@ export default function Create() {
                   borderColor="gray.700"
                   ref={register}
                   name="time"
+                  style={{ background: "#2D3748" }}
                 />
               </FormControl>
               <FormControl id="duration" isRequired>
@@ -172,7 +204,11 @@ export default function Create() {
                   name="duration"
                 >
                   {Array.from({ length: 15 }, (_, i) => (
-                    <Option value={`${i + 1}`} name={`${i + 1} hour (s)`} />
+                    <Option
+                      key={i}
+                      value={`${i + 1}`}
+                      name={`${i + 1} hour (s)`}
+                    />
                   ))}
                 </Select>
               </FormControl>
@@ -248,6 +284,7 @@ export default function Create() {
             </FormControl>
             <Button
               colorScheme="blue"
+              isLoading={submitting ? true : false}
               size="2xl"
               w={{ base: "full", lg: 1 / 5 }}
               py={3}

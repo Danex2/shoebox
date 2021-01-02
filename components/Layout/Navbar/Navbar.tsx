@@ -16,9 +16,13 @@ import NavLink from "@/components/Layout/Navbar/NavLink";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
 import { FcMenu } from "react-icons/fc";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 export default function Navbar() {
   const [session] = useSession();
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -48,37 +52,63 @@ export default function Navbar() {
         <Box>
           {session ? (
             <>
-              <Box display={{ base: "none", lg: "flex" }} alignItems="center">
+              <Box
+                display={{ base: "none", lg: "flex" }}
+                alignItems="center"
+                position="relative"
+              >
+                <Text
+                  mr={2}
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  fontWeight="semibold"
+                >
+                  {session.user.name}
+                </Text>
                 <Image
                   src={session.user.image}
                   boxSize="30px"
                   borderRadius="full"
-                  mr={2}
+                  mr={1}
                 />
-                <Text
-                  textTransform="uppercase"
-                  fontSize="sm"
-                  fontWeight="bold"
-                  mr={10}
-                >
-                  {session.user.name}
-                </Text>
-                <Stack direction="row">
-                  <NavLink href="/create" name="Create" />
-                  <Text
-                    fontWeight="semibold"
-                    fontSize="sm"
-                    textTransform="uppercase"
-                    cursor="pointer"
-                    transition="color 0.5s ease-in-out"
-                    _hover={{
-                      color: "gray.400",
-                    }}
-                    onClick={() => signOut()}
-                  >
-                    Logout
-                  </Text>
-                </Stack>
+                <ChevronDownIcon
+                  w={7}
+                  h={7}
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  cursor="pointer"
+                />
+                {showDropdown ? (
+                  <>
+                    <Box
+                      position="absolute"
+                      bg="gray.700"
+                      top={10}
+                      px={10}
+                      py={15}
+                      zIndex={5}
+                      borderRadius={10}
+                      shadow="lg"
+                      borderColor="gray.100"
+                      border={1}
+                    >
+                      <Stack direction="column">
+                        <NavLink href="/create" name="Create" />
+                        <Text
+                          fontWeight="semibold"
+                          fontSize="sm"
+                          cursor="pointer"
+                          transition="color 0.5s ease-in-out"
+                          _hover={{
+                            color: "gray.400",
+                          }}
+                          onClick={() => signOut()}
+                        >
+                          Logout
+                        </Text>
+                      </Stack>
+                    </Box>
+                  </>
+                ) : null}
               </Box>
               <Box
                 display={{ base: "block", lg: "none" }}
@@ -118,7 +148,6 @@ export default function Navbar() {
                     <Text
                       fontWeight="semibold"
                       fontSize="sm"
-                      textTransform="uppercase"
                       cursor="pointer"
                       transition="color 0.5s ease-in-out"
                       _hover={{

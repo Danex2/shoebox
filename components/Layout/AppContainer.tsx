@@ -21,8 +21,8 @@ export default function AppContainer({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content={`WarcraftGuilds | ${title}`} />
         <meta
-          property="og:url"
-          content="https://www.imdb.com/title/tt0117500/"
+          property="og:description"
+          content="WarcraftGuilds makes it easy to find like-minded players to play with. Create an account and start your search today!"
         />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

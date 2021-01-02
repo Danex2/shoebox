@@ -30,11 +30,23 @@ const options: InitOptions = {
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
+  secret: process.env.SECRET,
+  session: {
+    jwt: false,
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
   callbacks: {
     redirect: async (url, baseUrl) => {
       return url.startsWith(baseUrl)
         ? Promise.resolve(url)
         : Promise.resolve(baseUrl);
+    },
+    session: async (session: any, user: any) => {
+      session.user.id = user.id;
+      session.user.createdAt = user.createdAt;
+
+      return Promise.resolve(session);
     },
   },
 };

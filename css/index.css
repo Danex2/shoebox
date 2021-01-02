@@ -1,0 +1,15 @@
+.multi-select {
+  --rmsc-main: #4285f4;
+  --rmsc-hover: #4a5568 !important;
+  --rmsc-selected: #4a5568 !important;
+  --rmsc-border: none !important;
+  --rmsc-gray: #fff;
+  --rmsc-bg: #2d3748 !important;
+  --rmsc-p: 10px; /* Spacing */
+  --rmsc-radius: 6px !important; /* Radius */
+  --rmsc-h: 40px !important; /* Height */
+}
+
+.gray {
+  color: white !important;
+}
