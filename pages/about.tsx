@@ -12,7 +12,7 @@ export default function About() {
   const t = getLocale(locale);
 
   return (
-    <AppContainer title="About" mt={20}>
+    <AppContainer title="About" mt={{ lg: 20 }} py={{ base: 10, lg: 0 }}>
       <AppContent>
         <Text as="h2" fontSize="2xl" fontWeight="bold" mb={2}>
           {t.q1}

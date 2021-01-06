@@ -6,7 +6,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Image,
   Stack,
   Text,
   useDisclosure,
@@ -18,9 +17,17 @@ import { useSession, signOut } from "next-auth/client";
 import { FcMenu } from "react-icons/fc";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { getLocale } from "@/lib/getLocale";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const [session] = useSession();
+
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = getLocale(locale);
 
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -65,12 +72,6 @@ export default function Navbar() {
                 >
                   {session.user.name}
                 </Text>
-                <Image
-                  src={session.user.image}
-                  boxSize="30px"
-                  borderRadius="full"
-                  mr={1}
-                />
                 <ChevronDownIcon
                   w={7}
                   h={7}
@@ -84,6 +85,7 @@ export default function Navbar() {
                       bg="gray.700"
                       top={10}
                       px={10}
+                      w={200}
                       py={15}
                       zIndex={5}
                       borderRadius={10}
@@ -92,7 +94,8 @@ export default function Navbar() {
                       border={1}
                     >
                       <Stack direction="column">
-                        <NavLink href="/create" name="Create" />
+                        <NavLink href="/create" name={t.navbar.create} />
+                        <NavLink href="/me" name={t.navbar.guildAd} />
                         <Text
                           fontWeight="semibold"
                           fontSize="sm"
@@ -103,7 +106,7 @@ export default function Navbar() {
                           }}
                           onClick={() => signOut()}
                         >
-                          Logout
+                          {t.navbar.logout}
                         </Text>
                       </Stack>
                     </Box>
@@ -135,16 +138,11 @@ export default function Navbar() {
                     borderBottomColor="gray.500"
                     display="flex"
                   >
-                    <Image
-                      src={session.user.image}
-                      boxSize="30px"
-                      borderRadius="full"
-                      mr={2}
-                    />
                     {session.user.name}
                   </DrawerHeader>
                   <DrawerBody>
                     <NavLink href="/create" name="Create" />
+                    <NavLink href="/me" name="Guild Ad" />
                     <Text
                       fontWeight="semibold"
                       fontSize="sm"

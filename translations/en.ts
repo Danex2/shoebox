@@ -28,4 +28,9 @@ export default {
     time: "Raid time",
     duration: "Duration",
   },
+  navbar: {
+    create: "Create",
+    guildAd: "Guild Ad",
+    logout: "Logout",
+  },
 };

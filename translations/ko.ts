@@ -25,4 +25,9 @@ export default {
     time: "레이드 시간",
     duration: "지속",
   },
+  navbar: {
+    create: "창조하다",
+    guildAd: "길드 광고",
+    logout: "로그 아웃",
+  },
 };

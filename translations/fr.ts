@@ -40,4 +40,9 @@ Autre que l'utilisation de votre compte Discord pour vous connecter (les seules 
     time: "Temps de raid",
     duration: "Durée",
   },
+  navbar: {
+    create: "Créer",
+    guildAd: "Annonce de guilde",
+    logout: "Se déconnecter",
+  },
 };

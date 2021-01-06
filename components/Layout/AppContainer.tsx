@@ -32,9 +32,9 @@ export default function AppContainer({
       </Head>
       <Box minH="100vh" display="flex" flexDirection="column">
         <Navbar />
-        <Container as="main" maxW="6xl" flex={1} {...props}>
+        <Box as="main" flex={1} {...props}>
           {children}
-        </Container>
+        </Box>
         <Footer />
       </Box>
     </Box>

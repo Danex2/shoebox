@@ -6,6 +6,6 @@ context("/", () => {
   });
 
   it("Should render the home page", () => {
-    cy.get("[data-cy=search-text]");
+    cy.url().should("equal", "http://localhost:3000/");
   });
 });
