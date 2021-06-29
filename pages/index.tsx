@@ -1,7 +1,6 @@
 import AppCpntainer from "@/components/Layout/AppContainer";
 import {
   Grid,
-  Text,
   Checkbox,
   HStack,
   CheckboxGroup,
@@ -12,12 +11,10 @@ import {
   Input,
   Stack,
   RadioGroup,
-  Box,
   Button,
 } from "@chakra-ui/react";
 import GuildCard from "@/components/GuildCard";
 import Option from "@/components/Option";
-import MultiSelect from "react-multi-select-component";
 import { useEffect, useState } from "react";
 import { getLocale } from "@/lib/getLocale";
 import { useRouter } from "next/router";
@@ -25,6 +22,7 @@ import { useRouter } from "next/router";
 export default function Home() {
   const guilds = [
     {
+      id: 1,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -38,6 +36,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 2,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -51,6 +50,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 3,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -64,6 +64,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 4,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -77,6 +78,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 5,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -90,6 +92,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 6,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -103,6 +106,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 7,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -116,6 +120,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 8,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -129,6 +134,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 9,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -142,6 +148,7 @@ export default function Home() {
       server: "Illidan",
     },
     {
+      id: 10,
       guildName: "Dead Meme Dream Team",
       interests: ["PvP", "PvE", "RP"],
       time: "19:00",
@@ -304,11 +311,7 @@ export default function Home() {
           autoRows="min(250px)"
           mt={10}
           pb={{ base: 10, lg: 0 }}
-        >
-          {guilds.map((guild) => (
-            <GuildCard guild={guild} />
-          ))}
-        </Grid>
+        ></Grid>
       </Grid>
     </AppCpntainer>
   );

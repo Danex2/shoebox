@@ -1,8 +1,8 @@
-import NextAuth, { InitOptions } from "next-auth";
+import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { PrismaClient } from "@prisma/client";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextApiRequest, NextApiResponse } from "next";
-import Adapters from "next-auth/adapters";
 
 declare global {
   namespace NodeJS {
@@ -22,14 +22,14 @@ if (process.env.NODE_ENV === "production") {
   }
   prisma = global.prisma;
 }
-const options: InitOptions = {
+const options = {
   providers: [
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma }),
+  adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   session: {
     jwt: false,

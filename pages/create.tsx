@@ -121,7 +121,7 @@ export default function Create() {
                 maxLength={24}
                 autoComplete="off"
                 borderColor="gray.700"
-                ref={register}
+                {...register("guildName")}
                 name="title"
               />
             </FormControl>
@@ -145,7 +145,7 @@ export default function Create() {
                 <Select
                   borderColor="gray.700"
                   bg="gray.700"
-                  ref={register}
+                  {...register("server")}
                   name="server"
                 >
                   {serverList?.map(({ id, slug, name }) => (
@@ -158,7 +158,7 @@ export default function Create() {
                 <Select
                   borderColor="gray.700"
                   bg="gray.700"
-                  ref={register}
+                  {...register("discipline")}
                   name="discipline"
                 >
                   <Option value="casual" name="Casual" />
@@ -190,7 +190,7 @@ export default function Create() {
                 <Input
                   type="time"
                   borderColor="gray.700"
-                  ref={register}
+                  {...register("time")}
                   name="time"
                   style={{ background: "#2D3748" }}
                 />
@@ -200,7 +200,7 @@ export default function Create() {
                 <Select
                   borderColor="gray.700"
                   bg="gray.700"
-                  ref={register}
+                  {...register("duration")}
                   name="duration"
                 >
                   {Array.from({ length: 15 }, (_, i) => (
@@ -219,7 +219,7 @@ export default function Create() {
               size="sm"
               isRequired
               rows={15}
-              ref={register}
+              {...register("description")}
               name="description"
             />
             <FormControl id="languages" isRequired>
@@ -248,7 +248,7 @@ export default function Create() {
               <FormLabel as="legend">{t.create.faction}</FormLabel>
               <RadioGroup
                 defaultValue="Horde"
-                ref={register}
+                {...register("faction")}
                 name="faction"
                 onChange={(e) =>
                   setClickInputs({

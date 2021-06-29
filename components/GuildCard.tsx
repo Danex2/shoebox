@@ -16,7 +16,7 @@ type GuildProps = {
   };
 };
 
-export default function GuildCard({ guild }: GuildProps) {
+export default function GuildCard({ guild, ...props }: GuildProps) {
   return (
     <Box
       bg="gray.700"
@@ -24,6 +24,7 @@ export default function GuildCard({ guild }: GuildProps) {
       overflow="hidden"
       display="flex"
       flexDir="column"
+      {...props}
     >
       <Box py={2} px={4}>
         <Box

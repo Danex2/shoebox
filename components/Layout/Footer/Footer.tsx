@@ -54,9 +54,6 @@ export default function Footer() {
             divider={<StackDivider borderColor="gray.600" />}
             mb={{ base: 3, lg: 0 }}
           >
-            <Link href={`${locale}/about`} locale={false}>
-              {t.footer.links[0]}
-            </Link>
             <Text>{t.footer.links[1]}</Text>
             <Text>{t.footer.links[2]}</Text>
           </Stack>
