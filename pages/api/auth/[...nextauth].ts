@@ -29,8 +29,8 @@ const options = {
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
-  adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+  adapter: PrismaAdapter(prisma),
   session: {
     jwt: false,
     maxAge: 30 * 24 * 60 * 60,
