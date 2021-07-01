@@ -1,5 +1,38 @@
-import { NextApiResponse, NextApiRequest } from "next";
+import { ApolloServer } from "apollo-server-micro";
+import { gql } from "apollo-server-micro";
+import Cors from "micro-cors";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  return res.status(200).json({ data: { message: "Hello World " } });
+const cors = Cors();
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => "Hello from Apollo Server",
+  },
 };
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+});
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default cors((req, res) => {
+  if (req.method === "OPTIONS") {
+    res.end();
+    return false;
+  }
+
+  return server.createHandler({ path: "/api/graphql" })(req, res);
+});
