@@ -34,6 +34,8 @@
     "commitizen": "^4.2.2",
     "cypress": "^7.6.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.29.0",
+    "eslint-config-next": "^11.0.1",
     "husky": "^6.0.0",
     "msw": "^0.30.0",
     "prisma": "^2.26.0",
